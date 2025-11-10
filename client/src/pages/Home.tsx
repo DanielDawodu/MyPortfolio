@@ -1,19 +1,51 @@
+import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
+import HeroSection from "@/components/HeroSection";
+import AboutSection from "@/components/AboutSection";
+import ProjectsSection from "@/components/ProjectsSection";
+import ContactSection from "@/components/ContactSection";
+import Footer from "@/components/Footer";
 
 export default function Home() {
+  useEffect(() => {
+    const handleSmoothScroll = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const link = target.closest('a[href^="#"]');
+      
+      if (link) {
+        const href = link.getAttribute("href");
+        if (href && href.startsWith("#")) {
+          e.preventDefault();
+          const targetId = href.substring(1);
+          const targetElement = document.getElementById(targetId);
+          
+          if (targetElement) {
+            const navHeight = 80;
+            const targetPosition = targetElement.offsetTop - navHeight;
+            
+            window.scrollTo({
+              top: targetPosition,
+              behavior: "smooth",
+            });
+          }
+        }
+      }
+    };
+
+    document.addEventListener("click", handleSmoothScroll);
+    return () => document.removeEventListener("click", handleSmoothScroll);
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <main className="max-w-6xl mx-auto px-6 py-16">
-        <div className="flex items-center justify-center min-h-[60vh]">
-          <h1
-            data-testid="text-setup-message"
-            className="text-4xl md:text-5xl font-bold text-center text-foreground"
-          >
-            Portfolio setup complete 💻
-          </h1>
-        </div>
+      <main>
+        <HeroSection />
+        <AboutSection />
+        <ProjectsSection />
+        <ContactSection />
       </main>
+      <Footer />
     </div>
   );
 }
