@@ -1,5 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Code2, Database, Globe, Palette, Server, Smartphone } from "lucide-react";
+import profileImage from "../assets/profile.jpeg";
+
 
 export default function AboutSection() {
   const skills = [
@@ -18,16 +20,15 @@ export default function AboutSection() {
           {/* Left Column - Image */}
           <div className="lg:col-span-5">
             <div className="relative">
-              <div className="aspect-square rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                <div className="w-full h-full rounded-2xl border-2 border-border bg-card flex items-center justify-center">
-                  <div className="text-center p-8">
-                    <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
-                      <Code2 className="w-16 h-16 text-primary" />
-                    </div>
-                    <p className="text-muted-foreground text-sm">
-                      Professional Developer
-                    </p>
-                  </div>
+              <div 
+                className="aspect-square rounded-2xl border-2 border-border bg-card flex items-end justify-center bg-cover bg-top bg-no-repeat relative overflow-hidden"
+                style={{ backgroundImage: `url(${profileImage})` }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <div className="relative z-10 text-center p-8 w-full">
+                  <p className="text-white text-lg font-semibold drop-shadow-lg">
+                    Professional Developer
+                  </p>
                 </div>
               </div>
             </div>

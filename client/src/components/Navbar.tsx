@@ -21,7 +21,7 @@ export default function Navbar() {
             data-testid="link-home"
             className="text-xl md:text-2xl font-bold text-foreground hover-elevate px-2 py-1 rounded-md transition-colors"
           >
-            Portfolio
+            Daniel Dawodu
           </a>
 
           {/* Desktop Navigation */}

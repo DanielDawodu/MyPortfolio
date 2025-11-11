@@ -39,10 +39,24 @@ export default function ContactSection() {
   };
 
   const socialLinks = [
-    { name: "GitHub", icon: Github, url: "https://github.com" },
-    { name: "LinkedIn", icon: Linkedin, url: "https://linkedin.com" },
-    { name: "Twitter", icon: Twitter, url: "https://twitter.com" },
-  ];
+  {
+    name: "GitHub",
+    icon: Github,
+    url: "https://github.com/DanielDawodu", // my GitHub link
+  },
+  {
+    name: "LinkedIn",
+    icon: Linkedin,
+    url: "https://www.linkedin.com/in/daniel-dawodu-13b937337/", // my LinkedIn profile
+  
+  },
+  {
+    name: "Twitter",
+    icon: Twitter,
+    url: "https://x.com/danieldawodu95", // my X (Twitter)
+  },
+];
+
 
   return (
     <section id="contact" className="py-16 md:py-24 lg:py-32 bg-background">
@@ -150,10 +164,10 @@ export default function ContactSection() {
                   <div>
                     <div className="font-medium text-foreground">Email</div>
                     <a
-                      href="mailto:hello@example.com"
+                      href="mailto:danieldawodu07@gmail.com"
                       className="text-muted-foreground hover:text-primary transition-colors"
                     >
-                      hello@example.com
+                      danieldawodu07@gmail.com
                     </a>
                   </div>
                 </div>
@@ -165,7 +179,7 @@ export default function ContactSection() {
                   <div>
                     <div className="font-medium text-foreground">Location</div>
                     <div className="text-muted-foreground">
-                      San Francisco, CA
+                      UNILAG, Lagos, Nigeria
                     </div>
                   </div>
                 </div>

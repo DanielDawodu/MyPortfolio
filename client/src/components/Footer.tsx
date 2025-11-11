@@ -19,7 +19,7 @@ export default function Footer() {
               data-testid="text-footer-name"
               className="text-lg font-bold text-card-foreground mb-1"
             >
-              Portfolio
+              Daniel Dawodu
             </h3>
             <p className="text-sm text-muted-foreground">
               Crafting digital experiences

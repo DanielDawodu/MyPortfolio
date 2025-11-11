@@ -73,22 +73,22 @@ export default function HeroSection() {
               data-testid="card-stat-experience"
               className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6"
             >
-              <div className="text-4xl font-bold text-white mb-2">5+ Years</div>
-              <div className="text-white/80">Professional Experience</div>
+              <div className="text-3xl font-bold text-white mb-2">Learning and Growing</div>
+              <div className="text-white/80">Continuously Improving</div>
             </div>
             <div
               data-testid="card-stat-projects"
               className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6"
             >
-              <div className="text-4xl font-bold text-white mb-2">50+ Projects</div>
-              <div className="text-white/80">Successfully Delivered</div>
+              <div className="text-4xl font-bold text-white mb-2">3+ Projects</div>
+              <div className="text-white/80">Active Projects</div>
             </div>
             <div
               data-testid="card-stat-clients"
               className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6"
             >
-              <div className="text-4xl font-bold text-white mb-2">100%</div>
-              <div className="text-white/80">Client Satisfaction</div>
+              <div className="text-2xl font-bold text-white mb-2">Open to Internships</div>
+              <div className="text-white/80">and Junior Dev Roles</div>
             </div>
           </div>
         </div>
