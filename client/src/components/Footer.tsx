@@ -62,7 +62,7 @@ export default function Footer() {
             data-testid="text-copyright"
             className="text-sm text-muted-foreground"
           >
-            © {currentYear} Portfolio. All rights reserved.
+            © {currentYear} Daniel Dawodu. All rights reserved.
           </p>
         </div>
       </div>
