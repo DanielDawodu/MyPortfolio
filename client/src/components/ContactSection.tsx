@@ -3,31 +3,21 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Mail, MapPin, Github, Linkedin, Twitter } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
+import emailjs from "emailjs-com";
 
 export default function ContactSection() {
   const { toast } = useToast();
+  const formRef = useRef<HTMLFormElement>(null);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
+
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    setTimeout(() => {
-      toast({
-        title: "Message Sent!",
-        description: "Thank you for reaching out. I'll get back to you soon.",
-      });
-      setFormData({ name: "", email: "", message: "" });
-      setIsSubmitting(false);
-    }, 1000);
-  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -38,41 +28,56 @@ export default function ContactSection() {
     }));
   };
 
-  const socialLinks = [
-  {
-    name: "GitHub",
-    icon: Github,
-    url: "https://github.com/DanielDawodu", // my GitHub link
-  },
-  {
-    name: "LinkedIn",
-    icon: Linkedin,
-    url: "https://www.linkedin.com/in/daniel-dawodu-13b937337/", // my LinkedIn profile
-  
-  },
-  {
-    name: "Twitter",
-    icon: Twitter,
-    url: "https://x.com/danieldawodu95", // my X (Twitter)
-  },
-];
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formRef.current) return;
 
+    setIsSubmitting(true);
+
+    try {
+      await emailjs.sendForm(
+        "service_67kkejz",    // Replace with your EmailJS Service ID
+        "template_90l2sl2",   // Replace with your Contact Us Template ID
+        formRef.current,
+        "a8_isc7VmymEbRThF"     // Replace with your EmailJS Public Key
+      );
+
+      toast({
+        title: "Message Sent!",
+        description: "Thank you for reaching out. I'll get back to you soon.",
+      });
+
+      setFormData({ name: "", email: "", message: "" });
+    } catch (error) {
+      console.error("EmailJS Error:", error);
+      toast({
+        title: "Error Sending Message",
+        description: "Something went wrong. Please try again later.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const socialLinks = [
+    { name: "GitHub", icon: Github, url: "https://github.com/DanielDawodu" },
+    {
+      name: "LinkedIn",
+      icon: Linkedin,
+      url: "https://www.linkedin.com/in/daniel-dawodu-13b937337/",
+    },
+    { name: "Twitter", icon: Twitter, url: "https://x.com/danieldawodu95" },
+  ];
 
   return (
     <section id="contact" className="py-16 md:py-24 lg:py-32 bg-background">
       <div className="max-w-6xl mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-16">
-          <h2
-            data-testid="text-contact-title"
-            className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-4 text-foreground"
-          >
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-4 text-foreground">
             Get In Touch
           </h2>
-          <p
-            data-testid="text-contact-subtitle"
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto"
-          >
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
             Have a project in mind or want to collaborate? I'd love to hear from
             you.
           </p>
@@ -83,18 +88,25 @@ export default function ContactSection() {
           {/* Left Column - Contact Form */}
           <div className="lg:col-span-7">
             <form
-              data-testid="form-contact"
+              ref={formRef}
               onSubmit={handleSubmit}
               className="space-y-6"
             >
+              {/* Hidden inputs for template parameters not in the form */}
+              <input type="hidden" name="title" value="New Contact Form Submission" />
+              <input
+                type="hidden"
+                name="time"
+                value={new Date().toLocaleString()}
+              />
+
               <div>
                 <Label htmlFor="name" className="text-base font-medium mb-2">
                   Name
                 </Label>
                 <Input
                   id="name"
-                  name="name"
-                  data-testid="input-name"
+                  name="name"  // matches template {{name}}
                   value={formData.name}
                   onChange={handleChange}
                   placeholder="Your name"
@@ -109,9 +121,8 @@ export default function ContactSection() {
                 </Label>
                 <Input
                   id="email"
-                  name="email"
+                  name="email"  // matches template {{email}}
                   type="email"
-                  data-testid="input-email"
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="your.email@example.com"
@@ -126,8 +137,7 @@ export default function ContactSection() {
                 </Label>
                 <Textarea
                   id="message"
-                  name="message"
-                  data-testid="input-message"
+                  name="message"  // matches template {{message}}
                   value={formData.message}
                   onChange={handleChange}
                   placeholder="Tell me about your project..."
@@ -138,7 +148,6 @@ export default function ContactSection() {
 
               <Button
                 type="submit"
-                data-testid="button-submit"
                 size="lg"
                 className="w-full font-medium"
                 disabled={isSubmitting}
@@ -150,16 +159,12 @@ export default function ContactSection() {
 
           {/* Right Column - Contact Info */}
           <div className="lg:col-span-5 space-y-8">
-            {/* Contact Information */}
             <div>
               <h3 className="text-xl font-semibold mb-4 text-foreground">
                 Contact Information
               </h3>
               <div className="space-y-4">
-                <div
-                  data-testid="contact-email"
-                  className="flex items-start gap-3"
-                >
+                <div className="flex items-start gap-3">
                   <Mail className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
                   <div>
                     <div className="font-medium text-foreground">Email</div>
@@ -171,10 +176,7 @@ export default function ContactSection() {
                     </a>
                   </div>
                 </div>
-                <div
-                  data-testid="contact-location"
-                  className="flex items-start gap-3"
-                >
+                <div className="flex items-start gap-3">
                   <MapPin className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
                   <div>
                     <div className="font-medium text-foreground">Location</div>
@@ -184,22 +186,6 @@ export default function ContactSection() {
                   </div>
                 </div>
               </div>
-            </div>
-
-            {/* Availability Status */}
-            <div className="p-6 rounded-xl bg-primary/10 border border-primary/20">
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse" />
-                <span
-                  data-testid="text-availability"
-                  className="font-semibold text-foreground"
-                >
-                  Available for New Projects
-                </span>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                Currently accepting freelance and contract opportunities.
-              </p>
             </div>
 
             {/* Social Links */}
@@ -212,7 +198,6 @@ export default function ContactSection() {
                   <a
                     key={social.name}
                     href={social.url}
-                    data-testid={`link-social-${social.name.toLowerCase()}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-3 rounded-md bg-card border border-card-border hover-elevate transition-all"
