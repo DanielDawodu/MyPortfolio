@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { a } from "node_modules/vite/dist/node/types.d-aGj9QkWt";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,7 +18,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo / Name */}
           <a
-            href="#"
+            href="#hero"
             data-testid="link-home"
             className="text-xl md:text-2xl font-bold text-foreground hover-elevate px-2 py-1 rounded-md transition-colors"
           >
@@ -44,8 +45,9 @@ export default function Navbar() {
               data-testid="button-cta"
               className="font-medium"
               size="default"
+              asChild
             >
-              Get in Touch
+              <a href="#contact">Get in Touch</a>
             </Button>
           </div>
 

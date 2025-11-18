@@ -39,32 +39,56 @@ export default function HeroSection() {
               code and exceptional user experiences.
             </p>
 
-            {/* CTAs */}
-            <div className="flex flex-wrap gap-4">
-              <Button
-                data-testid="button-view-projects"
-                size="lg"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium backdrop-blur-md border border-primary-border"
-                asChild
-              >
-                <a href="#projects">
-                  View Projects
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </a>
-              </Button>
-              <Button
-                data-testid="button-contact"
-                size="lg"
-                variant="outline"
-                className="bg-white/10 hover:bg-white/20 text-white border-white/30 backdrop-blur-md font-medium"
-                asChild
-              >
-                <a href="#contact">
-                  Contact Me
-                  <Download className="ml-2 w-5 h-5" />
-                </a>
-              </Button>
-            </div>
+{/* CTAs */}
+<div className="flex flex-wrap gap-4">
+  {/* View Projects */}
+  <Button
+    data-testid="button-view-projects"
+    size="lg"
+    className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium backdrop-blur-md border border-primary-border"
+    asChild
+  >
+    <a href="#projects">
+      View Projects
+      <ArrowRight className="ml-2 w-5 h-5" />
+    </a>
+  </Button>
+
+  {/* View Resume */}
+  <Button
+    data-testid="button-view-resume"
+    size="lg"
+    variant="outline"
+    className="bg-white/10 hover:bg-white/20 text-white border-white/30 backdrop-blur-md font-medium"
+    asChild
+  >
+    <a
+      href="/Daniel_Dawodu_Junior_Web_Developer_Resume.pdf"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      View Resume
+    </a>
+  </Button>
+
+  {/* Download Resume */}
+  <Button
+    data-testid="button-download-resume"
+    size="lg"
+    variant="outline"
+    className="bg-white/10 hover:bg-white/20 text-white border-white/30 backdrop-blur-md font-medium flex items-center gap-2"
+    asChild
+  >
+    <a
+      href="/Daniel_Dawodu_Junior_Web_Developer_Resume.pdf"
+      download="Daniel_Dawodu_Resume.pdf"
+    >
+      <Download className="w-5 h-5" />
+      Download
+    </a>
+  </Button>
+</div>
+
           </div>
 
           {/* Right Column - Stats/Info */}
