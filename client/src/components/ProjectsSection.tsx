@@ -6,19 +6,25 @@ export default function ProjectsSection() {
   const projects = [
     {
       id: 1,
-      title: "E-Commerce Platform",
+      title: "WeatherWise | Real-Time Weather Forecast App",
       description:
-        "A full-featured online shopping platform with cart management, payment integration, and admin dashboard.",
-      tags: ["React", "Node.js", "PostgreSQL", "Stripe"],
-      gradient: "from-blue-500/20 to-purple-500/20",
+        "WeatherWise is a simple weather app that lets users search any city and instantly see current weather conditions.",
+      tags: ["React", "Tailwind CSS", "Vite", "npm"],
+      gradient: "from-blue-500/20 to-cyan-500/20",
+      demoUrl: "https://myweatherdashboard.vercel.app/",
+      codeUrl: "https://github.com/DanielDawodu/WeatherWise",
+      image: "/weather-dashboard.png",
     },
     {
       id: 2,
-      title: "Task Management App",
+      title: "TaskFlow – Smart Task Management",
       description:
-        "Collaborative task management tool with real-time updates, team workspaces, and advanced filtering.",
-      tags: ["TypeScript", "Express", "MongoDB", "WebSocket"],
+        "TaskFlow Manager is a modern web app that helps users organize, track, and manage tasks efficiently in one clean, intuitive workspace.",
+      tags: ["TypeScript", "React", "Node", "Express", "Tailwind CSS", "Vite", "npm"],
       gradient: "from-green-500/20 to-teal-500/20",
+      demoUrl: "https://mytaskflowapp.vercel.app/",
+      codeUrl: "https://github.com/DanielDawodu/TaskFlowManager",
+      image: "/task-flow.png",
     },
     {
       id: 3,
@@ -27,6 +33,8 @@ export default function ProjectsSection() {
         "Real-time analytics platform with interactive charts, data visualization, and export capabilities.",
       tags: ["React", "D3.js", "Tailwind", "REST API"],
       gradient: "from-orange-500/20 to-red-500/20",
+      demoUrl: "#",
+      codeUrl: "#",
     },
     {
       id: 4,
@@ -35,6 +43,8 @@ export default function ProjectsSection() {
         "Social networking platform with user profiles, posts, comments, and real-time notifications.",
       tags: ["Next.js", "Prisma", "PostgreSQL", "AWS"],
       gradient: "from-pink-500/20 to-rose-500/20",
+      demoUrl: "#",
+      codeUrl: "#",
     },
   ];
 
@@ -71,11 +81,19 @@ export default function ProjectsSection() {
                 className={`h-48 bg-gradient-to-br ${project.gradient} flex items-center justify-center relative overflow-hidden`}
               >
                 <div className="absolute inset-0 bg-grid-pattern opacity-10" />
-                <div className="relative z-10 text-center p-6">
-                  <div className="w-20 h-20 mx-auto mb-3 rounded-lg bg-background/50 backdrop-blur-sm flex items-center justify-center border border-border">
-                    <Github className="w-10 h-10 text-foreground" />
+                {project.image ? (
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                ) : (
+                  <div className="relative z-10 text-center p-6">
+                    <div className="w-20 h-20 mx-auto mb-3 rounded-lg bg-background/50 backdrop-blur-sm flex items-center justify-center border border-border">
+                      <Github className="w-10 h-10 text-foreground" />
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
 
               {/* Project Content */}
@@ -114,18 +132,24 @@ export default function ProjectsSection() {
                     variant="default"
                     size="sm"
                     className="flex-1"
+                    asChild
                   >
-                    <ExternalLink className="w-4 h-4 mr-2" />
-                    View Demo
+                    <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
+                      <ExternalLink className="w-4 h-4 mr-2" />
+                      View Demo
+                    </a>
                   </Button>
                   <Button
                     data-testid={`button-view-code-${project.id}`}
                     variant="outline"
                     size="sm"
                     className="flex-1"
+                    asChild
                   >
-                    <Github className="w-4 h-4 mr-2" />
-                    View Code
+                    <a href={project.codeUrl} target="_blank" rel="noopener noreferrer">
+                      <Github className="w-4 h-4 mr-2" />
+                      View Code
+                    </a>
                   </Button>
                 </div>
               </div>
@@ -136,3 +160,4 @@ export default function ProjectsSection() {
     </section>
   );
 }
+
