@@ -27,7 +27,7 @@ export default function ProjectsSection() {
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {projects.map((project) => (
+          {projects.slice(0, 4).map((project) => (
             <div
               key={project.id}
               data-testid={`project-card-${project.id}`}
