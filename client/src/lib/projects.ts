@@ -43,4 +43,14 @@ export const projects = [
         codeUrl: "https://github.com/DanielDawodu/Bling",
         image: "/bling-preview.png",
     },
+    {
+        id: 5,
+        title: "Vexon | Lead Generation Website",
+        description: "A lead generation website for a car dealership agency. It connects Vexon to both car buyers and car dealers alike.",
+        tags: ["TypeScript", "MongoDB"],
+        gradient: "from-purple-500/20 to-indigo-500/20",
+        demoUrl: "https://vexonconcepts.vercel.app/",
+        codeUrl: "https://github.com/DanielDawodu/Vexon",
+        image: "/vexon-preview.png",
+    },
 ];
