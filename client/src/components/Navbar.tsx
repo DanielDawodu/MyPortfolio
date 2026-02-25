@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "wouter";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -29,14 +30,25 @@ export default function Navbar() {
             <ul className="flex items-center gap-6">
               {navLinks.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
-                    data-testid={`link-${link.name.toLowerCase()}`}
-                    className="text-base font-medium text-foreground/80 hover:text-foreground relative group transition-colors"
-                  >
-                    {link.name}
-                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
-                  </a>
+                  {link.href.startsWith("/#") ? (
+                    <a
+                      href={link.href}
+                      data-testid={`link-${link.name.toLowerCase()}`}
+                      className="text-base font-medium text-foreground/80 hover:text-foreground relative group transition-colors"
+                    >
+                      {link.name}
+                      <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+                    </a>
+                  ) : (
+                    <Link
+                      href={link.href}
+                      data-testid={`link-${link.name.toLowerCase()}`}
+                      className="text-base font-medium text-foreground/80 hover:text-foreground relative group transition-colors"
+                    >
+                      {link.name}
+                      <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -79,14 +91,25 @@ export default function Navbar() {
             <ul className="flex flex-col items-center gap-6 w-full">
               {navLinks.map((link) => (
                 <li key={link.name} className="w-full">
-                  <a
-                    href={link.href}
-                    data-testid={`mobile-link-${link.name.toLowerCase()}`}
-                    onClick={() => setIsMenuOpen(false)}
-                    className="block text-center text-2xl font-semibold text-foreground hover:text-primary transition-colors py-3"
-                  >
-                    {link.name}
-                  </a>
+                  {link.href.startsWith("/#") ? (
+                    <a
+                      href={link.href}
+                      data-testid={`mobile-link-${link.name.toLowerCase()}`}
+                      onClick={() => setIsMenuOpen(false)}
+                      className="block text-center text-2xl font-semibold text-foreground hover:text-primary transition-colors py-3"
+                    >
+                      {link.name}
+                    </a>
+                  ) : (
+                    <Link
+                      href={link.href}
+                      data-testid={`mobile-link-${link.name.toLowerCase()}`}
+                      onClick={() => setIsMenuOpen(false)}
+                      className="block text-center text-2xl font-semibold text-foreground hover:text-primary transition-colors py-3"
+                    >
+                      {link.name}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
