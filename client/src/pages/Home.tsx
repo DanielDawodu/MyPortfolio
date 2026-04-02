@@ -10,19 +10,19 @@ export default function Home() {
   useEffect(() => {
     const handleSmoothScroll = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      const link = target.closest('a[href^="#"]');
-      
+      const link = target.closest('a[href^="#"], a[href^="/#"]');
+
       if (link) {
         const href = link.getAttribute("href");
-        if (href && href.startsWith("#")) {
+        if (href) {
           e.preventDefault();
-          const targetId = href.substring(1);
+          const targetId = href.startsWith("/#") ? href.substring(2) : href.substring(1);
           const targetElement = document.getElementById(targetId);
-          
+
           if (targetElement) {
             const navHeight = 80;
             const targetPosition = targetElement.offsetTop - navHeight;
-            
+
             window.scrollTo({
               top: targetPosition,
               behavior: "smooth",
@@ -31,6 +31,22 @@ export default function Home() {
         }
       }
     };
+
+    // Handle hash on initial load
+    if (window.location.hash) {
+      const targetId = window.location.hash.substring(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        setTimeout(() => {
+          const navHeight = 80;
+          const targetPosition = targetElement.offsetTop - navHeight;
+          window.scrollTo({
+            top: targetPosition,
+            behavior: "smooth",
+          });
+        }, 100);
+      }
+    }
 
     document.addEventListener("click", handleSmoothScroll);
     return () => document.removeEventListener("click", handleSmoothScroll);

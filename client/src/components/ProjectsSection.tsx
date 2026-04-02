@@ -1,53 +1,10 @@
+import { Link } from "wouter";
+import { projects } from "@/lib/projects";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Github } from "lucide-react";
 
 export default function ProjectsSection() {
-  const projects = [
-    {
-      id: 1,
-      title: "WeatherWise | Real-Time Weather Forecast App",
-      description:
-        "WeatherWise is a simple weather app that lets users search any city and instantly see current weather conditions.",
-      tags: ["React", "Tailwind CSS", "Vite", "npm"],
-      gradient: "from-blue-500/20 to-cyan-500/20",
-      demoUrl: "https://myweatherdashboard.vercel.app/",
-      codeUrl: "https://github.com/DanielDawodu/WeatherWise",
-      image: "/weather-dashboard.png",
-    },
-    {
-      id: 2,
-      title: "TaskFlow – Smart Task Management",
-      description:
-        "TaskFlow Manager is a modern web app that helps users organize, track, and manage tasks efficiently in one clean, intuitive workspace.",
-      tags: ["TypeScript", "React", "Node", "Express", "Tailwind CSS", "Vite", "npm"],
-      gradient: "from-green-500/20 to-teal-500/20",
-      demoUrl: "https://mytaskflowapp.vercel.app/",
-      codeUrl: "https://github.com/DanielDawodu/TaskFlowManager",
-      image: "/task-flow.png",
-    },
-    {
-      id: 3,
-      title: "Analytics Dashboard",
-      description:
-        "Real-time analytics platform with interactive charts, data visualization, and export capabilities.",
-      tags: ["React", "D3.js", "Tailwind", "REST API"],
-      gradient: "from-orange-500/20 to-red-500/20",
-      demoUrl: "#",
-      codeUrl: "#",
-    },
-    {
-      id: 4,
-      title: "Social Media App",
-      description:
-        "Social networking platform with user profiles, posts, comments, and real-time notifications.",
-      tags: ["Next.js", "Prisma", "PostgreSQL", "AWS"],
-      gradient: "from-pink-500/20 to-rose-500/20",
-      demoUrl: "#",
-      codeUrl: "#",
-    },
-  ];
-
   return (
     <section id="projects" className="py-16 md:py-24 lg:py-32 bg-muted/30">
       <div className="max-w-6xl mx-auto px-6">
@@ -70,7 +27,7 @@ export default function ProjectsSection() {
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {projects.map((project) => (
+          {projects.slice(0, 4).map((project) => (
             <div
               key={project.id}
               data-testid={`project-card-${project.id}`}
@@ -155,6 +112,13 @@ export default function ProjectsSection() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* More Projects Button */}
+        <div className="mt-16 text-center">
+          <Button size="lg" className="px-8" asChild>
+            <Link href="/projects">More Projects</Link>
+          </Button>
         </div>
       </div>
     </section>

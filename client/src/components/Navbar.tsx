@@ -1,15 +1,15 @@
 import { useState } from "react";
+import { Link } from "wouter";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { a } from "node_modules/vite/dist/node/types.d-aGj9QkWt";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
-    { name: "About", href: "#about" },
-    { name: "Projects", href: "#projects" },
-    { name: "Contact", href: "#contact" },
+    { name: "About", href: "/#about" },
+    { name: "Projects", href: "/projects" },
+    { name: "Contact", href: "/#contact" },
   ];
 
   return (
@@ -18,7 +18,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo / Name */}
           <a
-            href="#hero"
+            href="/#hero"
             data-testid="link-home"
             className="text-xl md:text-2xl font-bold text-foreground hover-elevate px-2 py-1 rounded-md transition-colors"
           >
@@ -30,14 +30,25 @@ export default function Navbar() {
             <ul className="flex items-center gap-6">
               {navLinks.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
-                    data-testid={`link-${link.name.toLowerCase()}`}
-                    className="text-base font-medium text-foreground/80 hover:text-foreground relative group transition-colors"
-                  >
-                    {link.name}
-                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
-                  </a>
+                  {link.href.startsWith("/#") ? (
+                    <a
+                      href={link.href}
+                      data-testid={`link-${link.name.toLowerCase()}`}
+                      className="text-base font-medium text-foreground/80 hover:text-foreground relative group transition-colors"
+                    >
+                      {link.name}
+                      <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+                    </a>
+                  ) : (
+                    <Link
+                      href={link.href}
+                      data-testid={`link-${link.name.toLowerCase()}`}
+                      className="text-base font-medium text-foreground/80 hover:text-foreground relative group transition-colors"
+                    >
+                      {link.name}
+                      <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -47,7 +58,7 @@ export default function Navbar() {
               size="default"
               asChild
             >
-              <a href="#contact">Get in Touch</a>
+              <a href="/#contact">Get in Touch</a>
             </Button>
           </div>
 
@@ -80,14 +91,25 @@ export default function Navbar() {
             <ul className="flex flex-col items-center gap-6 w-full">
               {navLinks.map((link) => (
                 <li key={link.name} className="w-full">
-                  <a
-                    href={link.href}
-                    data-testid={`mobile-link-${link.name.toLowerCase()}`}
-                    onClick={() => setIsMenuOpen(false)}
-                    className="block text-center text-2xl font-semibold text-foreground hover:text-primary transition-colors py-3"
-                  >
-                    {link.name}
-                  </a>
+                  {link.href.startsWith("/#") ? (
+                    <a
+                      href={link.href}
+                      data-testid={`mobile-link-${link.name.toLowerCase()}`}
+                      onClick={() => setIsMenuOpen(false)}
+                      className="block text-center text-2xl font-semibold text-foreground hover:text-primary transition-colors py-3"
+                    >
+                      {link.name}
+                    </a>
+                  ) : (
+                    <Link
+                      href={link.href}
+                      data-testid={`mobile-link-${link.name.toLowerCase()}`}
+                      onClick={() => setIsMenuOpen(false)}
+                      className="block text-center text-2xl font-semibold text-foreground hover:text-primary transition-colors py-3"
+                    >
+                      {link.name}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -95,9 +117,10 @@ export default function Navbar() {
               data-testid="button-mobile-cta"
               size="lg"
               className="font-medium w-full max-w-xs"
+              asChild
               onClick={() => setIsMenuOpen(false)}
             >
-              Get in Touch
+              <a href="/#contact">Get in Touch</a>
             </Button>
           </div>
         </div>

@@ -20,7 +20,7 @@ export default function AboutSection() {
           {/* Left Column - Image */}
           <div className="lg:col-span-5">
             <div className="relative">
-              <div 
+              <div
                 className="aspect-square rounded-2xl border-2 border-border bg-card flex items-end justify-center bg-cover bg-top bg-no-repeat relative overflow-hidden"
                 style={{ backgroundImage: `url(${profileImage})` }}
               >
@@ -45,7 +45,7 @@ export default function AboutSection() {
             <div className="space-y-4 text-base md:text-lg text-foreground/80 mb-8">
               <p data-testid="text-about-bio-1">
                 I'm a passionate full-stack developer with a keen eye for detail
-                and a love for creating seamless digital experiences. With over 5
+                and a love for creating seamless digital experiences. With 2
                 years of experience, I specialize in building modern web
                 applications that are both beautiful and functional.
               </p>
