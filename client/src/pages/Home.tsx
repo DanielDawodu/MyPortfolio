@@ -1,10 +1,12 @@
 import { useEffect } from "react";
-import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import ContactSection from "@/components/ContactSection";
+import LatestArticles from "@/components/LatestArticles";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
+import profileImage from "../assets/profile.jpeg";
 
 export default function Home() {
   useEffect(() => {
@@ -54,11 +56,16 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <SEO 
+        title="Home" 
+        description="Daniel Dawodu - Professional Full-stack Developer. Explore my portfolio showcasing modern web development projects, skills, articles and professional experience."
+        image={profileImage}
+      />
       <main>
         <HeroSection />
         <AboutSection />
         <ProjectsSection />
+        <LatestArticles />
         <ContactSection />
       </main>
       <Footer />

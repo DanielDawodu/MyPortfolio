@@ -25,11 +25,12 @@ export default function HeroSection() {
           <div className="lg:col-span-7 text-white">
             <h1
               data-testid="text-hero-title"
-              className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
+              className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight tracking-tight mt-12"
             >
-              Building Digital
-              <br />
-              Experiences
+              Daniel Dawodu
+              <span className="block text-2xl md:text-3xl lg:text-4xl text-primary/90 mt-4 font-semibold">
+                Building Digital Experiences
+              </span>
             </h1>
             <p
               data-testid="text-hero-subtitle"
@@ -97,22 +98,22 @@ export default function HeroSection() {
               data-testid="card-stat-experience"
               className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6"
             >
-              <div className="text-3xl font-bold text-white mb-2">Learning and Growing</div>
-              <div className="text-white/80">Continuously Improving</div>
+              <div className="text-3xl font-bold text-white mb-2">2+ Years Building</div>
+              <div className="text-white/80">Real-World Products</div>
             </div>
             <div
               data-testid="card-stat-projects"
               className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6"
             >
-              <div className="text-4xl font-bold text-white mb-2">5+ Projects</div>
+              <div className="text-4xl font-bold text-white mb-2">6+ Projects</div>
               <div className="text-white/80">Active Projects</div>
             </div>
             <div
               data-testid="card-stat-clients"
               className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6"
             >
-              <div className="text-2xl font-bold text-white mb-2">Open to Internships</div>
-              <div className="text-white/80">and Junior Dev Roles</div>
+              <div className="text-2xl font-bold text-white mb-2">Available for Freelance</div>
+              <div className="text-white/80">& Full-Time Roles</div>
             </div>
           </div>
         </div>

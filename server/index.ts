@@ -1,8 +1,11 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
-import { exec } from "child_process";
+import { connectDB } from "./db";
+import dotenv from "dotenv";
 import path from "path";
+
+dotenv.config();
 
 const app = express();
 
@@ -57,14 +60,19 @@ app.use((req, res, next) => {
 });
 
 (async () => {
+  await connectDB();
   const server = await registerRoutes(app);
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
 
-    res.status(status).json({ message });
-    throw err;
+    // 🔥 Log the actual error to the console for debugging
+    console.error("❌ Global Server Error:", err);
+
+    if (!res.headersSent) {
+      res.status(status).json({ message });
+    }
   });
 
   // 🔥 Setup Vite only in development

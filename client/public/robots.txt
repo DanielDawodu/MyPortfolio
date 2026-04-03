@@ -1,0 +1,14 @@
+# Advanced Robots.txt for Daniel Dawodu's Portfolio
+# Goal: Ensure full crawling of articles while protecting admin areas
+
+User-agent: *
+Allow: /
+Allow: /articles
+Allow: /projects
+Disallow: /admin
+Disallow: /api/upload
+Disallow: /api/articles/*/view
+Disallow: /api/articles/impressions
+
+# Host
+Sitemap: http://localhost:5000/sitemap.xml

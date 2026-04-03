@@ -1,12 +1,13 @@
 import { ArrowUp } from "lucide-react";
+import { Link } from "wouter";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const quickLinks = [
-    { name: "About", href: "#about" },
-    { name: "Projects", href: "#projects" },
-    { name: "Contact", href: "#contact" },
+    { name: "About", href: "/#about" },
+    { name: "Projects", href: "/projects" },
+    { name: "Contact", href: "/#contact" },
   ];
 
   return (
@@ -31,13 +32,23 @@ export default function Footer() {
             <ul className="flex gap-6">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
-                    data-testid={`link-footer-${link.name.toLowerCase()}`}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {link.name}
-                  </a>
+                  {link.href.startsWith("/#") ? (
+                    <a
+                      href={link.href}
+                      data-testid={`link-footer-${link.name.toLowerCase()}`}
+                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      {link.name}
+                    </a>
+                  ) : (
+                    <Link
+                      href={link.href}
+                      data-testid={`link-footer-${link.name.toLowerCase()}`}
+                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      {link.name}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -45,14 +56,14 @@ export default function Footer() {
 
           {/* Right - Back to Top */}
           <div className="flex justify-end">
-            <a
-              href="#hero"
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
               data-testid="button-back-to-top"
-              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors group"
+              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors group cursor-pointer"
             >
               Back to top
               <ArrowUp className="w-4 h-4 group-hover:-translate-y-1 transition-transform" />
-            </a>
+            </button>
           </div>
         </div>
 

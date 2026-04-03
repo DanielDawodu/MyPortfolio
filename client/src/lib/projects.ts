@@ -45,12 +45,23 @@ export const projects = [
     },
     {
         id: 5,
-        title: "Vexon | Lead Generation Website",
-        description: "A lead generation website for a car dealership agency. It connects Vexon to both car buyers and car dealers alike.",
+        title: "Clearline Auto | Lead Generation Website",
+        description: "A lead generation website for a car dealership agency. It connects Clearline Auto to both car buyers and car dealers alike.",
         tags: ["TypeScript", "MongoDB"],
         gradient: "from-purple-500/20 to-indigo-500/20",
-        demoUrl: "https://vexonconcepts.vercel.app/",
+        demoUrl: "https://www.clearlineauto.com.ng/",
         codeUrl: "https://github.com/DanielDawodu/Vexon",
-        image: "/vexon-preview.png",
+        image: "/clearline-auto-preview.png",
+    },
+    {
+        id: 6,
+        title: "Slimfit Wellness Lab | High-Conversion Landing Page",
+        description:
+            "A high-conversion landing page for a premium health and wellness brand targeting the Nigerian market. Features a '4-in-1 system' narrative, custom-curated aesthetics, and high-impact social proof optimized for mobile conversions.",
+        tags: ["HTML5", "CSS3", "Vanilla JavaScript"],
+        gradient: "from-pink-500/20 to-purple-500/20",
+        demoUrl: "https://slimfitwellnesslab.com.ng/",
+        codeUrl: "https://github.com/DanielDawodu/Slimfit",
+        image: "/slimfit-wellness-lab-preview.png",
     },
 ];

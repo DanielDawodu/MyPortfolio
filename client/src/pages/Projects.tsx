@@ -3,13 +3,11 @@ import { projects } from "@/lib/projects";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Github, ArrowLeft } from "lucide-react";
-import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export default function Projects() {
     return (
-        <div className="min-h-screen bg-background">
-            <Navbar />
+        <>
             <main className="py-16 md:py-24 lg:py-32">
                 <div className="max-w-6xl mx-auto px-6">
                     <div className="flex items-center gap-4 mb-12">
@@ -90,6 +88,6 @@ export default function Projects() {
                 </div>
             </main>
             <Footer />
-        </div>
+        </>
     );
 }

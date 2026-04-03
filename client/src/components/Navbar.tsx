@@ -1,16 +1,23 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LayoutDashboard } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/hooks/use-auth";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user } = useAuth();
 
-  const navLinks = [
+  const baseLinks = [
     { name: "About", href: "/#about" },
     { name: "Projects", href: "/projects" },
+    { name: "Articles", href: "/articles" },
     { name: "Contact", href: "/#contact" },
   ];
+
+  const navLinks = user 
+    ? [...baseLinks, { name: "Dashboard", href: "/admin" }] 
+    : baseLinks;
 
   return (
     <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">

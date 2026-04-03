@@ -5,3 +5,9 @@ server/public
 vite.config.ts.*
 *.tar.gz
 .vercel
+.env
+.gemini
+*.log
+.DS_Store
+.idea
+.vscode
