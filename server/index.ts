@@ -75,8 +75,11 @@ const appPromise = (async () => {
     }
   });
 
-  // 🔥 Setup Vite only in development
-  if (app.get("env") === "development") {
+  // 🛡️ Safe Environment Check for Vercel vs Local
+  const isVercel = !!process.env.VERCEL;
+  const isDev = app.get("env") === "development" && !isVercel;
+
+  if (isDev) {
     await setupVite(app, server);
   } else {
     serveStatic(app);
@@ -85,7 +88,7 @@ const appPromise = (async () => {
   const port = parseInt(process.env.PORT || "5000", 10);
   
   // 🚀 Only listen if run directly (not in Vercel)
-  if (process.env.NODE_ENV !== "production" || !process.env.VERCEL) {
+  if (!isVercel) {
     server.listen(
       {
         port,
