@@ -1,8 +1,9 @@
-import { app, appPromise } from "../server/index";
+import { app, appPromise } from "../server/app";
 
 export default async function handler(req: any, res: any) {
   try {
     // 🛡️ Ensure the server (DB + Routes) is fully initialized before handling the request
+    // By importing from app.ts, we avoid loading Vite/Dev dependencies on Vercel
     await appPromise;
     
     // 🚀 Use the standard Express app handle to process the request
@@ -10,7 +11,6 @@ export default async function handler(req: any, res: any) {
   } catch (err: any) {
     console.error("❌ Vercel Function Invocation Error:", err);
     
-    // Return an actionable JSON message even if the DB connection fails
     if (!res.headersSent) {
       res.status(500).json({ 
         message: "Server Initialization Failed", 

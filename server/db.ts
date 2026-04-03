@@ -9,9 +9,17 @@ if (!MONGODB_URI) {
   throw new Error("MONGODB_URI is not defined in the environment variables");
 }
 
+let isConnected = false;
+
 export async function connectDB() {
+  if (isConnected) {
+    console.log("🟡 Already connected to MongoDB");
+    return;
+  }
+
   try {
     await mongoose.connect(MONGODB_URI);
+    isConnected = true;
     console.log("🟢 Connected to MongoDB Successfully");
   } catch (error) {
     console.error("🔴 MongoDB Connection Error:", error);
