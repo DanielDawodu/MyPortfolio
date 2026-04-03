@@ -59,7 +59,7 @@ app.use((req, res, next) => {
   next();
 });
 
-(async () => {
+const appPromise = (async () => {
   await connectDB();
   const server = await registerRoutes(app);
 
@@ -82,16 +82,23 @@ app.use((req, res, next) => {
     serveStatic(app);
   }
 
-  const open = (await import("open")).default;
-
   const port = parseInt(process.env.PORT || "5000", 10);
-  server.listen(
-    {
-      port,
-      host: "localhost",
-    },
-    () => {
-      log(`serving on http://localhost:${port}`);
-    }
-  );
+  
+  // 🚀 Only listen if run directly (not in Vercel)
+  if (process.env.NODE_ENV !== "production" || !process.env.VERCEL) {
+    server.listen(
+      {
+        port,
+        host: "0.0.0.0",
+      },
+      () => {
+        log(`serving on http://localhost:${port}`);
+      }
+    );
+  }
+  
+  return { app, server };
 })();
+
+export default app;
+export { app, appPromise };
