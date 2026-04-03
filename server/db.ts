@@ -15,6 +15,6 @@ export async function connectDB() {
     console.log("🟢 Connected to MongoDB Successfully");
   } catch (error) {
     console.error("🔴 MongoDB Connection Error:", error);
-    process.exit(1);
+    throw error; // Let the application handle it (e.g., return a 500 error) instead of crashing the process
   }
 }
