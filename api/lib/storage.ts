@@ -2,7 +2,7 @@ import {
   User, Article, Comment, 
   type InsertUser, type InsertArticle, type InsertComment, 
   type ArticleDocument, type CommentDocument 
-} from "@shared/schema";
+} from "../../shared/schema.js";
 import mongoose from "mongoose";
 
 export interface IStorage {
