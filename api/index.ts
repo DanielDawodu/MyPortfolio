@@ -1,4 +1,4 @@
-import { app, appPromise } from "../server/app";
+import { app, appPromise } from "./lib/app";
 
 export default async function handler(req: any, res: any) {
   try {

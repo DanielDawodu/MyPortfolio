@@ -2,11 +2,11 @@ import { createContext, useContext, ReactNode } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
-import type { User } from "@shared/schema";
+import type { UserDocument } from "@shared/schema";
 import { apiRequest } from "@/lib/queryClient";
 
 interface AuthContextType {
-  user: User | null;
+  user: UserDocument | null;
   isLoading: boolean;
   login: (data: any) => Promise<void>;
   logout: () => Promise<void>;
@@ -19,7 +19,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [, setLocation] = useLocation();
   const queryClient = useQueryClient();
 
-  const { data: user, isLoading } = useQuery<User | null>({
+  const { data: user, isLoading } = useQuery<UserDocument | null>({
     queryKey: ["/api/user"],
     queryFn: async () => {
       try {

@@ -69,6 +69,11 @@ export type InsertUser = z.infer<typeof insertUserSchema>;
 export type InsertArticle = z.infer<typeof insertArticleSchema>;
 export type InsertComment = z.infer<typeof insertCommentSchema>;
 
+export interface UserDocument extends Document {
+  username: string;
+  password?: string;
+}
+
 export interface ArticleDocument extends Document {
   title: string;
   slug: string;
