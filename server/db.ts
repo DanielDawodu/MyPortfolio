@@ -18,11 +18,17 @@ export async function connectDB() {
   }
 
   try {
-    await mongoose.connect(MONGODB_URI);
+    console.log("🕒 Connecting to MongoDB...");
+    const conn = await mongoose.connect(MONGODB_URI, {
+      serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of hanging
+    });
     isConnected = true;
-    console.log("🟢 Connected to MongoDB Successfully");
+    console.log(`🟢 Connected to MongoDB Successfully: ${conn.connection.host}`);
   } catch (error) {
     console.error("🔴 MongoDB Connection Error:", error);
-    throw error; // Let the application handle it (e.g., return a 500 error) instead of crashing the process
+    // Log the full URI (obscured password) to check if it's being parsed correctly
+    const obscuredUri = MONGODB_URI.replace(/:([^@]+)@/, ":****@");
+    console.error(`📍 Attempted URI: ${obscuredUri}`);
+    throw error;
   }
 }

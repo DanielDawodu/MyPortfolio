@@ -12,7 +12,14 @@ import { upload } from "./cloudinary";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // --- Session & Auth Setup ---
-  
+  if (!process.env.SESSION_SECRET) {
+    console.warn("⚠️ SESSION_SECRET not set, using default key");
+  }
+
+  if (!process.env.MONGODB_URI) {
+    console.error("❌ MONGODB_URI is MISSING. Session store will fail.");
+  }
+
   app.use(
     session({
       secret: process.env.SESSION_SECRET || "daniels_secret_key",
@@ -21,13 +28,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
       store: MongoStore.create({
         mongoUrl: process.env.MONGODB_URI,
         collectionName: "sessions",
+        ttl: 60 * 60 * 24 * 7, // 1 week
+        autoRemove: "native",
       }),
       cookie: {
         maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
         secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
       },
     })
   );
+
+  console.log("✅ Session Store Initialized with MongoDB");
 
   app.use(passport.initialize());
   app.use(passport.session());

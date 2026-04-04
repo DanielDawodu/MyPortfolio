@@ -8,6 +8,10 @@ dotenv.config();
 
 const app = express();
 
+// 🛡️ Required for Vercel functions to trust the reverse proxy
+// (Crucial for session cookies with secure: true)
+app.set("trust proxy", 1);
+
 declare module "http" {
   interface IncomingMessage {
     rawBody: unknown;
