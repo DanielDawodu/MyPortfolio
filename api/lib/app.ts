@@ -1,6 +1,6 @@
 import express, { type Request, Response, NextFunction } from "express";
-import { registerRoutes } from "./routes";
-import { connectDB } from "./db";
+import { registerRoutes } from "./routes.js";
+import { connectDB } from "./db.js";
 import dotenv from "dotenv";
 import path from "path";
 

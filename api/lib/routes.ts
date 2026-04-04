@@ -1,6 +1,6 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
-import { storage } from "./storage";
+import { storage } from "./storage.js";
 import { insertArticleSchema } from "@shared/schema";
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
@@ -8,7 +8,7 @@ import session from "express-session";
 import MongoStore from "connect-mongo";
 import slugify from "slugify";
 import { User } from "@shared/schema";
-import { upload } from "./cloudinary";
+import { upload } from "./cloudinary.js";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // --- Session & Auth Setup ---
