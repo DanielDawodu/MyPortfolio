@@ -13,22 +13,23 @@ interface SEOProps {
 export default function SEO({ 
   title, 
   description, 
-  image = "/og-image.png", 
-  url = window.location.href,
+  image, 
+  url = typeof window !== "undefined" ? window.location.href : "",
   type = "website",
   authorName = "Daniel Dawodu",
   publishedAt
 }: SEOProps) {
   const siteName = "Daniel Dawodu | Professional Web Developer";
   const fullTitle = title === "Home" ? siteName : `${title} | ${siteName}`;
+  const seoImage = image || "/og-image.png"; // Use article image or fallback
 
   // JSON-LD Structured Data
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Daniel Dawodu",
-    "url": "http://localhost:5000",
-    "image": image,
+    "url": "https://danieldawodu.com",
+    "image": "/profile.jpg",
     "jobTitle": "Full-stack Developer",
     "sameAs": [
       "https://github.com/DanielDawodu",
@@ -42,7 +43,7 @@ export default function SEO({
     "@type": "BlogPosting",
     "headline": title,
     "description": description,
-    "image": image,
+    "image": seoImage,
     "author": {
       "@type": "Person",
       "name": authorName
@@ -62,7 +63,7 @@ export default function SEO({
       <meta property="og:url" content={url} />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content={image} />
+      <meta property="og:image" content={seoImage} />
       
       {/* LinkedIn / Professional Attribution */}
       <meta property="article:author" content="https://linkedin.com/in/daniel-dawodu-13b937337" />
@@ -70,11 +71,11 @@ export default function SEO({
       <meta name="author" content="Daniel Dawodu" />
 
       {/* Twitter */}
-      <meta property="twitter:card" content="summary_large_image" />
-      <meta property="twitter:url" content={url} />
-      <meta property="twitter:title" content={fullTitle} />
-      <meta property="twitter:description" content={description} />
-      <meta property="twitter:image" content={image} />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:url" content={url} />
+      <meta name="twitter:title" content={fullTitle} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={seoImage} />
 
       {/* Structured Data */}
       <script type="application/ld+json">
