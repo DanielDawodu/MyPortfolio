@@ -28,7 +28,7 @@ export default function SEO({
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Daniel Dawodu",
-    "url": "https://danieldawodu.com",
+    "url": "https://danieldawodu.vercel.app",
     "image": "/profile.jpg",
     "jobTitle": "Full-stack Developer",
     "sameAs": [

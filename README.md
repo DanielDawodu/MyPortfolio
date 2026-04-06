@@ -2,6 +2,9 @@
 
 Hey! This is my **first portfolio project**, showing off my skills in building **clean, functional, and responsive web pages** using React and Tailwind CSS.  
 
+## Live URL
+[https://danieldawodu.vercel.app](https://danieldawodu.vercel.app)
+
 ## What’s Inside
 - **React** for building components  
 - **Tailwind CSS** for sleek, modern styling  
