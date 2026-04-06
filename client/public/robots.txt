@@ -11,4 +11,4 @@ Disallow: /api/articles/*/view
 Disallow: /api/articles/impressions
 
 # Host
-Sitemap: http://localhost:5000/sitemap.xml
+Sitemap: https://danieldawodu.vercel.app/sitemap.xml
