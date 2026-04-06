@@ -67,7 +67,7 @@ export default async function handler(req: any, res: any) {
     // Since everything is built into the same project, we can try to read it.
     // If reading fails, we'll return a minimal bootstrap HTML or a fallback.
     try {
-      const indexPath = path.join(process.cwd(), "client", "index.html");
+      const indexPath = path.join(process.cwd(), "dist", "public", "index.html");
       const html = fs.readFileSync(indexPath, "utf8");
       res.setHeader("Content-Type", "text/html");
       return res.status(200).send(html);
@@ -78,7 +78,7 @@ export default async function handler(req: any, res: any) {
       return res.status(200).send(`
 <!DOCTYPE html>
 <html>
-<head><title>Daniel Dawodu</title><script type="module" src="/src/main.tsx"></script></head>
+<head><title>Daniel Dawodu</title><script type="module" src="/assets/index.js"></script></head>
 <body><div id="root"></div></body>
 </html>
       `);
@@ -90,7 +90,7 @@ export default async function handler(req: any, res: any) {
     return res.status(200).send(`
 <!DOCTYPE html>
 <html>
-<head><title>Daniel Dawodu</title><script type="module" src="/src/main.tsx"></script></head>
+<head><title>Daniel Dawodu</title><script type="module" src="/assets/index.js"></script></head>
 <body><div id="root"></div></body>
 </html>
     `);
