@@ -1,4 +1,5 @@
 import { storage } from "./lib/storage.js";
+import { connectDB } from "./lib/mongodb.js";
 import fs from "fs";
 import path from "path";
 
@@ -8,6 +9,8 @@ const BOT_AGENTS = /Twitterbot|facebookexternalhit|WhatsApp|LinkedInBot|googlebo
 export default async function handler(req: any, res: any) {
   const userAgent = req.headers["user-agent"] || "";
   const { slug } = req.query;
+
+  await connectDB();
 
   try {
     const article = await storage.getArticleBySlug(slug as string);
