@@ -4,16 +4,20 @@
     "api/index.ts": {
       "memory": 1024,
       "maxDuration": 10
+    },
+    "api/bot-render.ts": {
+      "memory": 1024,
+      "maxDuration": 30
     }
   },
   "rewrites": [
     {
-      "source": "/api/(.*)",
-      "destination": "/api/index.ts"
+      "source": "/articles/:slug",
+      "destination": "/api/bot-render?slug=:slug"
     },
     {
-      "source": "/articles/:slug",
-      "destination": "/api/bot-render.ts"
+      "source": "/api/(.*)",
+      "destination": "/api/index.ts"
     },
     {
       "source": "/(.*)",
