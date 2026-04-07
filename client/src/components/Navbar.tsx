@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { Menu, X, LayoutDashboard } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/use-auth";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,13 +25,13 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo / Name */}
-          <a
-            href="/#hero"
-            data-testid="link-home"
-            className="text-xl md:text-2xl font-bold text-foreground hover-elevate px-2 py-1 rounded-md transition-colors"
-          >
-            Daniel Dawodu
-          </a>
+          <Link href="/">
+            <a
+              className="text-xl md:text-2xl font-bold text-foreground hover-elevate px-2 py-1 rounded-md transition-colors"
+            >
+              Daniel Dawodu
+            </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
@@ -69,11 +70,11 @@ export default function Navbar() {
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button - Z-INDEX MUST BE ABOVE MENU */}
           <button
             data-testid="button-menu-toggle"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-foreground hover-elevate rounded-md"
+            className="md:hidden p-2 text-foreground hover-elevate rounded-md relative z-[110]"
             aria-label="Toggle menu"
             aria-expanded={isMenuOpen}
             aria-controls="mobile-navigation"
@@ -88,14 +89,18 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Menu Overlay */}
-      {isMenuOpen && (
-        <div
-          id="mobile-navigation"
-          data-testid="mobile-menu"
-          className="md:hidden fixed inset-0 bg-background/95 backdrop-blur-md z-40"
-        >
-          <div className="flex flex-col items-center justify-center h-full gap-8 px-6">
-            <ul className="flex flex-col items-center gap-6 w-full">
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            id="mobile-navigation"
+            data-testid="mobile-menu"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.2, ease: "easeInOut" }}
+            className="md:hidden fixed inset-0 bg-background z-[100] flex flex-col pt-20 px-6 overflow-y-auto"
+          >
+            <ul className="flex flex-col gap-6 w-full">
               {navLinks.map((link) => (
                 <li key={link.name} className="w-full">
                   {link.href.startsWith("/#") ? (
@@ -103,7 +108,7 @@ export default function Navbar() {
                       href={link.href}
                       data-testid={`mobile-link-${link.name.toLowerCase()}`}
                       onClick={() => setIsMenuOpen(false)}
-                      className="block text-center text-2xl font-semibold text-foreground hover:text-primary transition-colors py-3"
+                      className="block text-3xl font-bold text-foreground hover:text-primary transition-colors py-2 border-b border-border/50"
                     >
                       {link.name}
                     </a>
@@ -112,7 +117,7 @@ export default function Navbar() {
                       href={link.href}
                       data-testid={`mobile-link-${link.name.toLowerCase()}`}
                       onClick={() => setIsMenuOpen(false)}
-                      className="block text-center text-2xl font-semibold text-foreground hover:text-primary transition-colors py-3"
+                      className="block text-3xl font-bold text-foreground hover:text-primary transition-colors py-2 border-b border-border/50"
                     >
                       {link.name}
                     </Link>
@@ -120,18 +125,23 @@ export default function Navbar() {
                 </li>
               ))}
             </ul>
-            <Button
-              data-testid="button-mobile-cta"
-              size="lg"
-              className="font-medium w-full max-w-xs"
-              asChild
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <a href="/#contact">Get in Touch</a>
-            </Button>
-          </div>
-        </div>
-      )}
+            <div className="mt-12 flex flex-col gap-6">
+              <Button
+                data-testid="button-mobile-cta"
+                size="lg"
+                className="font-semibold text-xl h-14 rounded-2xl w-full"
+                asChild
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <a href="/#contact">Get in Touch</a>
+              </Button>
+              <p className="text-center text-muted-foreground text-sm">
+                Built with precision by Daniel Dawodu
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
