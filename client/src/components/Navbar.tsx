@@ -21,7 +21,7 @@ export default function Navbar() {
     : baseLinks;
 
   return (
-    <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
+    <nav className="fixed top-0 left-0 right-0 z-[100] bg-background/95 backdrop-blur-md border-b border-border shadow-sm">
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo / Name */}
@@ -74,7 +74,7 @@ export default function Navbar() {
           <button
             data-testid="button-menu-toggle"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-foreground hover-elevate rounded-md relative z-[110]"
+            className="md:hidden p-2 text-foreground hover:bg-muted rounded-md relative z-[120]"
             aria-label="Toggle menu"
             aria-expanded={isMenuOpen}
             aria-controls="mobile-navigation"
@@ -98,9 +98,9 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2, ease: "easeInOut" }}
-            className="md:hidden fixed inset-0 bg-background z-[100] flex flex-col pt-20 px-6 overflow-y-auto"
+            className="md:hidden fixed inset-0 bg-background z-[110] flex flex-col pt-20 px-6 overflow-y-auto"
           >
-            <ul className="flex flex-col gap-6 w-full">
+            <ul className="flex flex-col gap-6 w-full pt-12">
               {navLinks.map((link) => (
                 <li key={link.name} className="w-full">
                   {link.href.startsWith("/#") ? (
@@ -108,7 +108,7 @@ export default function Navbar() {
                       href={link.href}
                       data-testid={`mobile-link-${link.name.toLowerCase()}`}
                       onClick={() => setIsMenuOpen(false)}
-                      className="block text-3xl font-bold text-foreground hover:text-primary transition-colors py-2 border-b border-border/50"
+                      className="block text-2xl font-bold text-foreground hover:text-primary transition-colors py-3 border-b border-border/50"
                     >
                       {link.name}
                     </a>
@@ -117,7 +117,7 @@ export default function Navbar() {
                       href={link.href}
                       data-testid={`mobile-link-${link.name.toLowerCase()}`}
                       onClick={() => setIsMenuOpen(false)}
-                      className="block text-3xl font-bold text-foreground hover:text-primary transition-colors py-2 border-b border-border/50"
+                      className="block text-2xl font-bold text-foreground hover:text-primary transition-colors py-3 border-b border-border/50"
                     >
                       {link.name}
                     </Link>
@@ -129,7 +129,7 @@ export default function Navbar() {
               <Button
                 data-testid="button-mobile-cta"
                 size="lg"
-                className="font-semibold text-xl h-14 rounded-2xl w-full"
+                className="font-semibold text-lg h-12 rounded-xl w-full"
                 asChild
                 onClick={() => setIsMenuOpen(false)}
               >
